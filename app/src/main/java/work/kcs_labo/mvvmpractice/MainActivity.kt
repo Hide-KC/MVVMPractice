@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.activity_main.*
 import work.kcs_labo.mvvmpractice.databinding.ActivityMainBinding
 
@@ -26,12 +25,11 @@ class MainActivity : AppCompatActivity() {
         viewmodel.inputText.observe(this, Observer { input ->
             if (input != null) {
                 //UI更新
-                this.output.text = input
+                binding.output.text = input
             }
         })
 
         //BindingインスタンスにViewModelを追加
-        //これでMainActivityのViewとViewModelとが紐づけされる
         binding.viewmodel = viewmodel
 
         //TextWatcherで入力監視
@@ -40,8 +38,12 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 //ここでViewModelを参照
-                if (s != null) viewmodel.inputText.value = s.toString()
+                if (s != null) {
+                    binding.viewmodel?.setInputText(s.toString())
+                }
             }
         })
     }
+
+
 }
