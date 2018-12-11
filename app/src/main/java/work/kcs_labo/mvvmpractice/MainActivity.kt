@@ -1,14 +1,8 @@
 package work.kcs_labo.mvvmpractice
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import kotlinx.android.synthetic.main.activity_main.*
-import work.kcs_labo.mvvmpractice.databinding.ActivityMainBinding
 
 const val MAIN_FRAG = "MAIN"
 class MainActivity : AppCompatActivity() {
@@ -29,6 +23,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun obtainViewModel() = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
-
 }

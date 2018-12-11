@@ -1,7 +1,6 @@
 package work.kcs_labo.mvvmpractice
 
 import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Editable
@@ -10,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import work.kcs_labo.mvvmpractice.databinding.FragmentMainBinding
-import work.kcs_labo.mvvmpractice.databinding.FragmentMainBindingImpl
 
 class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
