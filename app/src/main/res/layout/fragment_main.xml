@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable name="viewmodel" type="work.kcs_labo.mvvmpractice.MainViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="文字を入力してくだしあ"
+                android:ems="10"
+                android:id="@+id/input" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"/>
+        <TextView
+                android:hint="ここに反映されます"
+                android:text="@{viewmodel.inputText}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/output" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/input" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp" android:textSize="18sp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
+
