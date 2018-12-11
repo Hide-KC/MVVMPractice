@@ -10,40 +10,25 @@ import android.text.TextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
 import work.kcs_labo.mvvmpractice.databinding.ActivityMainBinding
 
+const val MAIN_FRAG = "MAIN"
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        //Viewの生成（inflate）
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        //または次も可
-//        val binding = ActivityMainBinding.inflate(layoutInflater)
+        //ViewModelの生成
+        //特に使うわけじゃないけど、onCreateで生成しなければならない
+        obtainViewModel()
 
-        //MainViewModelの生成
-        val viewmodel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewmodel.inputText.observe(this, Observer { input ->
-            if (input != null) {
-                //UI更新
-                binding.output.text = input
-            }
-        })
-
-        //BindingインスタンスにViewModelを追加
-        binding.viewmodel = viewmodel
-
-        //TextWatcherで入力監視
-        input.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                //ここでViewModelを参照
-                if (s != null) {
-                    binding.viewmodel?.setInputText(s.toString())
-                }
-            }
-        })
+        //Fragmentに置換
+        val fragment = MainFragment.newInstance()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame, fragment, MAIN_FRAG)
+        transaction.commit()
     }
+
+    fun obtainViewModel() = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
 
 }
