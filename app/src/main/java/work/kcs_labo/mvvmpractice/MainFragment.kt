@@ -1,6 +1,8 @@
 package work.kcs_labo.mvvmpractice
 
 import android.arch.lifecycle.Observer
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Editable
@@ -12,15 +14,13 @@ import work.kcs_labo.mvvmpractice.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
-
-        //Viewをバインド
-        val binding = FragmentMainBinding.bind(view)
+        //inflate
+        val binding = DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container,false)
 
         //ActivityからViewModelの取得
         //LifecycleOwnerに紐づいたViewModelが返る
         val viewmodel = (activity as MainActivity).obtainViewModel()
-        viewmodel.inputText.observe((activity as MainActivity), Observer { inputValue ->
+        viewmodel.inputText.observe(this, Observer { inputValue ->
             //UI更新
             binding.output.text = inputValue
         })
@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
             }
         })
 
-        return view
+        return binding.root
     }
 
     companion object {
