@@ -20,13 +20,11 @@ class MainFragment : Fragment() {
         //ActivityからViewModelの取得
         //LifecycleOwnerに紐づいたViewModelが返る
         val viewmodel = (activity as MainActivity).obtainViewModel()
-        viewmodel.inputText.observe(this, Observer { inputValue ->
-            //UI更新
-            binding.output.text = inputValue
-        })
 
         //ViewとViewModelとを紐づけ
         binding.viewmodel = viewmodel
+        //LifecycleOwnerをセット（重要！）
+        binding.setLifecycleOwner(this)
 
         //TextWatcherの追加
         binding.input.addTextChangedListener(object : TextWatcher {
